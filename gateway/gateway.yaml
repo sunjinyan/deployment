@@ -26,7 +26,7 @@ spec:
             memory: "128Mi"
             cpu: "30m"
         ports:
-        - containerPort: 8080
+        - containerPort: 8080 #需要和Dockerfile里面声明的EXPOSE端口对应
 
 
 ---
@@ -41,4 +41,11 @@ spec:
     - name: http
       protocol: TCP
       port: 8080
-  type: ClusterIP
+      targetPort: 8080 #需要和containerPort: 8080对应 如果省略则默认值与port一样
+  type: ClusterIP  
+  #ExternalName     
+  #ClusterIP          
+  #NodePort 在node上开一个port和pod里的port做一个映射 设计的本意是为了集群的资源在内网使用而不是内网，如果NodePort的Pod所在的IP没有内网，那么网布也就无法访问了
+  #LoabBalancer  在NodePort之上建立的，所以NodePort的端口还会在
+
+  #service 上的就叫port  container上的相对于container叫containerProt  ports:- containerPort: 8080，相对于service叫target port （目标），node port实际物理port
