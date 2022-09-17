@@ -4,6 +4,9 @@ metadata:
   name: cos
 type: Opaque
 stringData:
-  url: <URL>
-  secid: <SECID>
-  seckey: <SECKEY>
+  #url: <URL>
+  url: oss-cn-beijing.aliyuncs.com
+  #secid: <SECID>
+  oss_access_key_id: LTAI5tNHZ4euwgkaJ6gQ6cSx
+  #seckey: <SECKEY> #可使用Jenkins得系统环境变量
+  oss_secret_key: wnsMMf6GP1YhH3lK5NwoJK02soNTdI

@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         app: gateway
+        version: "v1.0"
     spec:
       imagePullSecrets:
         - name: registry-secret
@@ -25,8 +26,20 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "30m"
+        env:
+        - name: AUTH_ADDR
+          valueFrom:
+            configMapKeyRef:
+              key: auth
+              name: endpoints
         ports:
         - containerPort: 8080 #需要和Dockerfile里面声明的EXPOSE端口对应
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5 #启动5秒之后
+          periodSeconds: 5  #每5秒检测一次
 
 
 ---
@@ -40,7 +53,8 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 8080
+      appProtocol: https
+      port: 80
       targetPort: 8080 #需要和containerPort: 8080对应 如果省略则默认值与port一样
   type: ClusterIP  
   #ExternalName     

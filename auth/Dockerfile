@@ -13,6 +13,8 @@ COPY  . /go/src/coolcar/server
 WORKDIR  /go/src/coolcar/server
 RUN  go install ./auth/...
 
+# 安装grpc-health-probe
+RUN go get github.com/grpc-ecosystem/grpc-health-probe
 
 
 #多编译阶段
@@ -20,7 +22,7 @@ RUN  go install ./auth/...
 FROM alpine:3.15
 
 COPY --from=builder  /go/bin/auth /bin/auth
-
+COPY --from=builder  /go/bin/grpc-health-probe /bin/grpc-health-probe
 
 ENV ADDR=:8081
 
