@@ -14,7 +14,7 @@ COPY  .  /go/src/coolcar/server
 
 # 编译
 WORKDIR /go/src/coolcar/server
-RUN  go install ./gateway/...
+RUN  go install  gateway/...
 
 
 #docker 多阶段编译  --from中的builder对应的就是顶部第一阶段中的builder
