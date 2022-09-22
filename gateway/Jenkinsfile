@@ -60,4 +60,15 @@ pipeline{
              }
          }
     }
+    post{
+        always{
+            mail to: '13683234298@163.com',subject: 'status of pipeline:${currentBuild.fullDisplayName}',body: "${env.BUILD_URL} has result ${currentBuild.result}"
+        }
+        failure{
+            updateGitlabCommitStatus name: 'build', state: 'failed'
+        }
+        success{
+            updateGitlabCommitStatus name: 'build', state: 'success'
+        }
+    }
 }
