@@ -3,6 +3,9 @@ kind: Secret
 metadata:
   name: auth
 type: Opaque
+#Secret 对象的名称必须是合法的 DNS 子域名。 在为创建 Secret 编写配置文件时，你可以设置 data 与/或 stringData 字段。
+#data 和 stringData 字段都是可选的。data 字段中所有键值都必须是 base64 编码的字符串。如果不希望执行这种 base64
+#字符串的转换操作，你可以选择设置 stringData 字段，其中可以使用任何字符串作为其取值。
 stringData:
   privatekey: |
     -----BEGIN RSA PRIVATE KEY-----
